@@ -1,4 +1,3 @@
 .terraform/
 terraform.tfstate
-.main.tf.swp
-*.terraform.lock.hcl
+.terraform.lock.hcl
