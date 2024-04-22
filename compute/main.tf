@@ -25,10 +25,19 @@ resource "google_compute_instance_template" "instance_template" {
 
     tags = var.network-tags
 
+    metadata = {
+      
+      ssh-keys = "ansible:${file("~/.ssh/my-key.pub")}"
+
+    }
+
     metadata_startup_script = <<-EOF
         
         name=$(hostname)
         echo "Welcome to server $name" > /var/www/html/index.html
+
+        sudo adduser ansible
+        sudo usermod -aG sudo ansible
          
     EOF
 
