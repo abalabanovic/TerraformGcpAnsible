@@ -1,0 +1,33 @@
+#Installing tools for Vms
+
+---
+- name: Install tools
+  hosts: servers
+  become: true
+
+  tasks:
+    - name: Update APT
+      apt:
+        update_cache: yes
+
+
+    - name: Install docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+        force_apt_get: yes
+
+    - name: Pull Docker image from Docker Hub
+      docker_image:
+        name: balaba/spring-pet-clinic:latest  
+        source: pull
+
+    - name: Run Docker container
+      docker_container:
+        name: pet-clinic
+        image: balaba/spring-pet-clinic:latest  
+        state: started              # Ensure the container is started
+        restart_policy: always      # Ensure the container restarts always if stopped
+        ports:
+          - "8080:8080"     

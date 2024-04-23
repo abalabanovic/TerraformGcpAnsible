@@ -26,7 +26,7 @@ firewall_rules = {
         name = "http-firewall-rule"
         description = "Allow HTTP traffic"
         protocol = "tcp"
-        ports = ["80"]
+        ports = ["80","8080"]
         target_tags = ["http-allow"]
         
   }
